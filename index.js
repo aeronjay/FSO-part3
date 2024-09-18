@@ -65,6 +65,39 @@ app.delete("/api/persons/:id", (req,res) => {
     res.status(204).end()
 })
 
+const generateID = () => {
+    return String(Math.floor(Math.random() * 10000))
+}
+const nameExists = (name) => {
+    return persons.some((person) => {
+        return person.name === name
+    })
+}
+
+app.post("/api/persons", (req,res) => {
+    if(!(req.body.name) || !(req.body.number)) {
+        return res.status(400).json({
+            error: "content missing"
+        })
+    }
+    if(nameExists(req.body.name)){
+        return res.status(400).json({
+            error: "name already exists"
+        })
+    }
+
+    const person = {
+        name: req.body.name,
+        number: req.body.number,
+        id: generateID()
+    }
+
+    persons = persons.concat(person)
+
+    console.log(person)
+    res.json(person)
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
     console.log("port running in ", PORT)
