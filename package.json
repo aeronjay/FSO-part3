@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/aeronjay/FSO-part3#readme",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "morgan": "^1.10.0"
   },
-  "devDependencies":{
+  "devDependencies": {
     "nodemon": "^3.1.5"
   }
 }
